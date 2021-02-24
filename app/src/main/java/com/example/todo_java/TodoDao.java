@@ -21,8 +21,8 @@ public interface TodoDao {
     List<Todo> select();
 
     // "INSERT INTO todo (id, content) VALUES(1, '밥 먹기')
-    @Query("INSERT INTO todo (content) VALUES(:content)")
-    void insert(String content);
+    @Query("INSERT INTO todo (content,completed) VALUES(:content,:completed)")
+    void insert(String content,Boolean completed);
 
     @Insert
     void insert(Todo todo);

@@ -22,3 +22,4 @@ public class Todo {
     // 완료 여부
     private boolean completed;
 }
+

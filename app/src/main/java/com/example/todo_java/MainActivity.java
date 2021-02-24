@@ -6,9 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.stream.Collectors;
 
@@ -18,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private EditText mTodoEditText;
     private AppDatabase db;
-
+    private CheckBox mCheckBox;
     private RecyclerView.LayoutManager mLayoutManager;
     private TodoRecyclerViewAdapter mAdapter;
 
@@ -27,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mCheckBox = findViewById(R.id.cb_complete);
         mSaveButton = findViewById(R.id.btn_save);
         mRecyclerView = findViewById(R.id.rv_result);
         mTodoEditText = findViewById(R.id.et_todo);
+        mCheckBox = findViewById(R.id.cb_complete);
 
         // DB 로드하기
         db = Room.databaseBuilder(this, AppDatabase.class, "todo-db")
@@ -46,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("sss","sssssss");
+            }
+        });
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 mTodoEditText.setText(null);
             }
         });
+
 
     }
 
